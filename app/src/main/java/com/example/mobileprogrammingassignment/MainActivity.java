@@ -12,13 +12,15 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button share;
+    Button share, butQuiz, butLout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         share=(Button) findViewById(R.id.share);
+        butQuiz = findViewById(R.id.Question1);
+        butLout = findViewById(R.id.logOut);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -31,11 +33,41 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(myIntent,"Share Using"));
             }
         });
+
+        butQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openQuizActivity();
+            }
+        });
+
+        butLout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLoutActivity();
+            }
+        });
+
     }
+
+
 
 
     protected void onPause() {
         super.onPause();
         startService(new Intent(this, Notification.class));
     }
+
+    public void openQuizActivity(){
+
+        Intent intent = new Intent(this, Quiz.class);
+        startActivity(intent);
+    }
+
+    public void openLoutActivity(){
+
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
+    }
+
 }
